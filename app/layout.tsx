@@ -8,6 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { theme } from '@/lib/theme'
 import { ToastProvider } from '@/components/ToastContext'
 import { Toaster } from '@/components/Toaster'
+import { NextAuthProvider } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <ToastProvider>
-              {children}
+              <NextAuthProvider>
+                {children}
+              </NextAuthProvider>
               <Toaster />
             </ToastProvider>
           </ThemeProvider>

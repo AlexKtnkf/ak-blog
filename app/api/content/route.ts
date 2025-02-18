@@ -8,7 +8,7 @@ import { withDatabase } from '@/lib/db/connection'
 
 export async function GET() {
   const session = await getServerSession(authConfig)
-  if (!session?.user?.id) {
+  if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -28,7 +28,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const session = await getServerSession(authConfig)
-  if (!session?.user?.id) {
+  if (!session?.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
     return await withDatabase(async (orm) => {
       const em = orm.em.fork()
       const body = await request.json()
-      const author = await em.findOne(User, { id: session.user.id })
+      const author = await em.findOne(User, { email: session?.user?.email })
       
       if (!author) {
         throw new Error('User not found')

@@ -19,7 +19,7 @@ export default function LoginPage() {
         password: formData.get('password'),
         redirect: false,
       })
-
+      console.log(response)
       if (response?.error) {
         setError('Invalid credentials')
         return

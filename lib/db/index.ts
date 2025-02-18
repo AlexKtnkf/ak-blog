@@ -1,26 +1,20 @@
 import { MikroORM } from '@mikro-orm/core';
 import { defineConfig } from '@mikro-orm/postgresql';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
+import { User, ContentEntry, Block, Tag, Comment } from './entities';
 
 export const config = defineConfig({
   clientUrl: process.env.DATABASE_URL,
-  pool: {
-    min: 0,
-    max: 10,
-  },
-  metadataProvider: TsMorphMetadataProvider,
+  entities: [User, ContentEntry, Block, Tag, Comment],
   migrations: {
     path: './lib/db/migrations',
     glob: '!(*.d).{js,ts}',
-    transactional: true,
-    disableForeignKeys: false,
-    allOrNothing: true,
-    safe: true,
   },
-  entities: ['./lib/db/entities'],
+  driverOptions: {
+    connection: { ssl: true },
+  },
+  pool: { min: 0, max: 10 },
   debug: process.env.NODE_ENV === 'development',
-  validateRequired: true,
-  forceUtcTimezone: true,
 });
 
 // Singleton pattern for connection management

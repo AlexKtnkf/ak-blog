@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migration:create": "mikro-orm migration:create",
+    "migration:up": "mikro-orm migration:up",
+    "migration:down": "mikro-orm migration:down",
+    "migration:list": "mikro-orm migration:list"
   },
   "dependencies": {
     "@auth/core": "^0.34.2",
@@ -39,6 +43,7 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@mikro-orm/cli": "^6.4.6",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.17.17",
     "@types/react": "^18.3.18",
@@ -49,6 +54,7 @@
     "postcss": "8.4.33",
     "prettier": "^3.2.4",
     "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
     "typescript": "5.3.3"
   }
 }
